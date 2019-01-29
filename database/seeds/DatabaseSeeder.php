@@ -11,6 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+          //Create Admin Seed
+          DB::table('admins')->insert([
+            'name' => 'Admin',
+            'email' => 'supacoderz@gmail.com',
+            'password' => Hash::make('password'),
+            'roles' => 'administrator',
+        ]);
+
     }
 }
