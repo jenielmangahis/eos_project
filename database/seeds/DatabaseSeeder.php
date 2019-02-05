@@ -19,5 +19,17 @@ class DatabaseSeeder extends Seeder
             'roles' => 'administrator',
         ]);
 
+        //Create Admin Seed
+        DB::table('users')->insert([
+            'lastname' => 'Reyes',
+            'firstname' => 'Andrian',
+            'number' =>'+639065547930',
+            'address' => '',
+            'city' =>'',
+
+            'email' => 'andrianreyes@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
+
     }
 }
