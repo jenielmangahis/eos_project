@@ -16,9 +16,32 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home/devices','DeviceController@index')->name('home.devices');
-Route::get('/home/zones','ZoneController@index')->name('home.zones');
+//Houses Routes
+Route::get('/home/houses/setinactive/{houseid}','HouseController@setinactive')->name('home.house.setinactive');
+Route::get('/home/houses/setactive/{houseid}','HouseController@setactive')->name('home.house.setactive');
+Route::resource('/home/houses', 'HouseController');
+//End of houses routes
+
+//Device Routes
+Route::get('/home/devices/destroy/{zoneid}','DeviceController@destroy')->name('device.destroy');
+Route::patch('/home/devices/update/{zoneid}','DeviceController@update')->name('device.update');
+Route::post('/home/devices/store','DeviceController@store')->name('device.store');
+Route::get('/home/devices/setinactive/{id}','DeviceController@setinactive')->name('device.setinactive');
+Route::get('/home/devices/setactive/{id}','DeviceController@setactive')->name('device.setactive');
+Route::get('/home/devices/{id}','DeviceController@index')->name('home.devices');
+//end of Device Routes
+
+//Zone Routes
+Route::get('/home/zones/setinactive/{zoneid}','ZoneController@setinactive')->name('zone.setinactive');
+Route::get('/home/zones/setactive/{zoneid}','ZoneController@setactive')->name('zone.setactive');
+Route::post('/home/zones/store/{houseid}','ZoneController@store')->name('zones.store');
+Route::get('/home/zones/destroy/{zoneid}','ZoneController@destroy')->name('zones.destroy');
+Route::patch('/home/zones/update/{zoneid}','ZoneController@update')->name('zones.update');
+Route::get('/home/zones/{houseid}','ZoneController@index')->name('zones');
+//End of Zone Routes
+
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 /* Admin Routes */
 Route::prefix('admin')->group(function(){

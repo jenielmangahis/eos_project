@@ -14,7 +14,7 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-    <a class="nav-link" href="index.html">
+    <a class="nav-link" href="{{ route('home')}}">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
@@ -75,13 +75,13 @@
     </a>
     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Manage Device</h6>
-        <a class="collapse-item" href="#">Add Device</a>
-        <a class="collapse-item" href="#">View Device</a>
-        <div class="collapse-divider"></div>
+
+        <a class="collapse-item" href="/home/houses">House(s)</a>
+       
+        <!--<div class="collapse-divider"></div>
         <h6 class="collapse-header">Manage Zone:</h6>
         <a class="collapse-item" href="#">Add Zone</a>
-        <a class="collapse-item" href="#">View Zone</a>
+        <a class="collapse-item" href="#">View Zone</a>-->
       </div>
     </div>
   </li>
@@ -95,7 +95,7 @@
 
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="tables.html">
+    <a class="nav-link" href="#">
       <i class="fas fa-fw fa-power-off"></i>
       <span>Signout</span></a>
   </li>

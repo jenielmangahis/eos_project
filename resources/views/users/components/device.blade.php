@@ -201,7 +201,7 @@
       <!-- Page Heading -->
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Devices</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add Device</a>
+        <a href="#"  data-toggle="modal" data-target="#AddModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add Device</a>
       </div>
 
       <!-- Content Row -->
@@ -215,34 +215,55 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>HID</th>
-                      <th>UUID</th>
-                      <th>Mac Address</th>
-                      <th>Ip</th>
-                      <th>Port</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Sensor Type</th>
+                      <th>Status</th>
+                      <th>Action</th>
+               
                     </tr>
                   </thead>
      
                   <tbody>
+
+                  @foreach($devices as $device)
                     <tr>
-                      <td>1</td>
-                      <td>HFHQ29t4GR</td>
-                      <td>90:DA:CF:3F:G2</td>
-                      <td>192.168.1.1</td>
-                      <td>8080</td>
+                      <td>{{ $device->name }}</td>
+                      <td>{{ $device->description }}</td>
+                      <td>{{ \Helper::SensorName($device->sensor_type_id) }}</td>
+                      @if($device->status==0)
+                      <td align="center"><a href="{{ route('device.setactive',['id'=>$device->id])}}" class="btn btn-danger btn-circle btn-sm">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </a></td>
+                      @else
+                      <td align="center"><a href="{{ route('device.setinactive',['id'=>$device->id])}}" class="btn btn-success btn-circle btn-sm">
+                    <i class="fas fa-check"></i>
+                  </a></td>
+                      @endif
+
+                      <td  align="center">
+   
+
+                      <a href="#"  data-toggle="modal" data-target="#EditModal{{$device->id }}"class="btn btn-primary btn-circle btn-xs">
+                      <i class="fas fa-edit"></i>
+                      </a>
+
+                      <a href="{{ route('device.destroy',['id'=> $device->id]) }}" class="btn btn-danger btn-circle btn-xs">
+                      <i class="fas fa-trash"></i>
+                      </a>
+                    </td>
+
+
                     </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>ASXKLABH22</td>
-                      <td>90:DA:AF:FF:H4</td>
-                      <td>192.168.1.2</td>
-                      <td>8080</td>
-                    </tr>
+
+                 
+              
 
                   
   
+                
 
-                    
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -261,6 +282,8 @@
     </div>
     <!-- /.container-fluid -->
 
+    @include('users.modals.device_add')
+    @include('users.modals.device_edit')
   </div>
   <!-- End of Main Content -->
 

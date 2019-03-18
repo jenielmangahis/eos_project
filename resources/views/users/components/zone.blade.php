@@ -200,8 +200,10 @@
 
       <!-- Page Heading -->
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Zones</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add Zone</a>
+      @foreach($house as $h)
+        <h1 class="h3 mb-0 text-gray-800">{{ $h->name }} - [Zone]</h1>
+        @endforeach
+        <a href="#" data-toggle="modal" data-target="#AddModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add Zone</a>
       </div>
 
       <!-- Content Row -->
@@ -211,34 +213,58 @@
             <div class="col-md-12">
           
             <div class="card-body">
+            
+       
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Zone ID</th>
-                      <th>Zone Name</th>
+                    <th>ID</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Status</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
      
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Zone A</td>
-                    </tr>
 
+                    @foreach($zones as $zone)
                     <tr>
-                      <td>2</td>
-                      <td>Zone B</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Zone C</td>
-                    </tr>
+                      <td>{{ $zone->id }}</td>
+                      <td>{{ $zone->name }}</td>
+                      <td>{{ $zone->description }}</td>
+                      
+                      @if($zone->status==0)
+                      <td align="center"><a href="{{ route('zone.setactive',['id'=>$zone->id])}}" class="btn btn-danger btn-circle btn-sm">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </a></td>
+                      @else
+                      <td align="center"><a href="{{ route('zone.setinactive',['id'=>$zone->id])}}" class="btn btn-success btn-circle btn-sm">
+                    <i class="fas fa-check"></i>
+                  </a></td>
+                      @endif
+                  
+                      
+                  
+                      <td  align="center">
+                      <a href="{{ route('home.devices',['id'=>$zone->id]) }}" class="btn btn-primary btn-circle btn-xs">
+                     <small>Device</small>
+                      </a>
 
-                    <tr>
-                      <td>4</td>
-                      <td>Zone C</td>
+                      <a href="#"  data-toggle="modal" data-target="#EditModal{{$zone->id }}"class="btn btn-primary btn-circle btn-xs">
+                      <i class="fas fa-edit"></i>
+                      </a>
+
+                      <a href="{{ route('zones.destroy',['id'=> $zone->id]) }}" class="btn btn-danger btn-circle btn-xs">
+                      <i class="fas fa-trash"></i>
+                      </a>
+                      </td>
                     </tr>
+                    @endforeach
+
+
+                   
   
 
                     
@@ -259,7 +285,8 @@
 
     </div>
     <!-- /.container-fluid -->
-
+    @include('users.modals.zone_add')
+    @include('users.modals.zone_edit')
   </div>
   <!-- End of Main Content -->
 
@@ -283,6 +310,7 @@
 <a class="scroll-to-top rounded" href="#page-top">
 <i class="fas fa-angle-up"></i>
 </a>
+
 
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

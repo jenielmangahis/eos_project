@@ -23,7 +23,7 @@
 <body id="page-top">
 
   @yield('content')
-
+  
   <!-- Bootstrap core JavaScript-->
   <script src="{{asset('userthemes/vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{asset('userthemes/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -40,6 +40,12 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('userthemes/js/demo/chart-area-demo.js') }}"></script>
   <script src="{{asset('userthemes/js/demo/chart-pie-demo.js') }}"></script>
+  @include('sweetalert::alert') 
+
+
+
+  
+
 
 </body>
 

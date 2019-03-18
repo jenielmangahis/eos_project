@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Zones;
+use App\Houses;
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $userId = Auth::id();
+        $houses = Houses::where('user_id',$userId)->orderBy('id', 'desc')->get();
+        $zones  = Zones::where('user_id','=',$userId)->orderBy('id', 'desc')->get();
+        return view('home',compact('houses','userId','zones'));
     }
 }
