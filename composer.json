@@ -10,7 +10,8 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "4.0.3",
         "laravel/tinker": "~1.0",
-        "realrashid/sweet-alert": "^1.1"
+        "realrashid/sweet-alert": "^1.1",
+        "khill/lavacharts" : "3.0.*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
